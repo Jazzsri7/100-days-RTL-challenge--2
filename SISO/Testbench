@@ -1,0 +1,33 @@
+module SISO_tb();
+	reg D,clock;
+	wire Q;
+	SISO S1(.D(D),.clock(clock),.Q(Q));
+	initial
+	begin
+		$monitor($time,"D=%b,clock=%b,Q=%b",D,clock,Q);
+	end
+	
+	initial
+	begin
+		clock=1'b1;
+		forever #5 clock=~clock;
+	end
+	initial 
+	begin 
+		D=0;
+		#5;
+	end
+	
+	initial
+	begin
+		D=1;
+		#10 D=0;
+		#10 D=0;
+		#10 D=1;
+		#10 D=0;
+		#10 D=1;
+		#10 D=1;
+		#10 D=0;
+		#10 $finish;
+	end 
+	endmodule
