@@ -1,0 +1,19 @@
+module SISO(D,clock,Q);
+	input D;
+	input clock;
+	output [3:0] Q;
+	d_ff d1(.d(D),.clk(clock),.q(Q[0]));
+	d_ff d2(.d(Q[0]),.clk(clock),.q(Q[1]));
+	d_ff d3(.d(Q[1]),.clk(clock),.q(Q[2]));
+	d_ff d4(.d(Q[2]),.clk(clock),.q(Q[3]));
+endmodule
+
+module d_ff(d,clk,q);
+input d,clk;
+output q;
+reg q=0;
+always@(posedge clk)
+begin
+	q<=d;
+end 
+endmodule 
