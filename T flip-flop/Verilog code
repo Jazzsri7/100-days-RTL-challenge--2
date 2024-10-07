@@ -1,0 +1,13 @@
+module t_ff(t,clk,rst,q);
+input t,clk,rst;
+output reg q;
+always@(posedge clk or negedge rst)
+begin
+	if(!rst)
+	q<=0;
+	else if(t==1)
+	q<=~q;
+	else 
+	q<=q;
+end 
+endmodule 
