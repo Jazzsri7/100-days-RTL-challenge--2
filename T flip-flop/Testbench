@@ -1,0 +1,41 @@
+module t_ff_tb();
+	reg t,clk,rst;
+	wire q;
+	
+	t_ff DUT (.t(t),.clk(clk),.rst(rst),.q(q));
+	
+	initial
+	begin
+	clk=1;
+	forever #5 clk=~clk;
+	end
+	
+	initial 
+	begin
+	rst=0;
+	t=0;
+	#10;
+	rst=1;
+	end
+	
+	initial 
+	begin
+	t=1;
+	#10;
+	t=0;
+	#10;
+	t=1;
+	#10;
+	t=1;
+	#10;
+	t=1;
+	#10;
+	t=0;
+	#10;
+	t=1;
+	#10;
+	t=0;
+	#50 $finish;
+	end
+	
+endmodule
