@@ -1,0 +1,27 @@
+module syn_counter_tb();
+	reg clk,reset;
+	wire [2:0] count;
+	
+	syn_counter DUT(.clk(clk),.reset(reset),.count(count));
+	
+	initial 
+	begin
+	  clk = 1;
+    forever #5 clk = ~clk;
+	end
+	
+	initial 
+	begin
+	reset = 1;
+	#10;
+	reset = 0;
+	#100;
+	reset = 1;
+	#10 $finish;
+	end
+	
+	initial 
+	begin
+		$monitor("clk = %b, reset = %b, count = %b", clk, reset, count);
+	end
+endmodule
