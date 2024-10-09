@@ -1,0 +1,25 @@
+module syn_downcounter_tb();
+	reg clk,reset;
+	wire [3:0] q;
+	
+	syn_downcounter DUT(.clk(clk),.reset(reset),.q(q));
+	
+	initial 
+	begin
+	clk = 1;
+    forever #5 clk = ~clk;
+	end
+	
+	initial 
+	begin
+	reset = 1;
+	#10;
+	reset = 0;
+	#200 $finish;
+	end
+	
+	initial 
+	begin
+		$monitor("clk = %b, reset = %b, q = %b", clk, reset, q);
+	end
+endmodule
