@@ -1,0 +1,29 @@
+module encoder_tb();
+	reg [3:0] I;
+	reg enable;
+	wire [1:0] Y;
+	
+	encoder DUT (.I(I),.enable(enable),.Y(Y));
+	
+	initial 
+	begin
+		enable = 0;
+		#10;
+	end
+	
+	initial 
+	begin
+		enable=1;
+		I=4'b0100;
+		#10
+		I=4'b0010;
+		#10
+		I=4'b0100;
+		#10
+		I=4'b1000;
+		#10
+		I=4'b0001;
+		#10 $finish;
+	end
+	
+endmodule
