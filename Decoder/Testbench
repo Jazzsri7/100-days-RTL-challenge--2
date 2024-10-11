@@ -1,0 +1,23 @@
+module decoder_tb();
+	reg [2:0] D;
+	reg enable;
+	wire [7:0] Y;
+	integer i;
+	
+	decoder DUT (.D(D),.enable(enable),.Y(Y));
+	
+	initial 
+	begin
+	    enable = 0;
+		D=3'b100;
+		#10;
+		enable=1;
+		for(i=0;i<8;i=i+1)
+			begin
+				D=i;
+				#10;
+			end
+		#10 $finish;
+	end
+	
+endmodule
