@@ -1,0 +1,31 @@
+module updown_counter_tb();
+	reg clk,reset,up_down;
+	wire [3:0] q;
+	
+	updown_counter DUT(.up_down(up_down),.clk(clk),.reset(reset),.q(q));
+	
+	initial 
+	begin
+	clk = 1;
+    forever #5 clk = ~clk;
+	end
+	
+	initial 
+	begin
+	reset = 1;
+	#10;
+	reset = 0;
+	up_down=1'b1;
+	#100;
+	reset=1;
+	#10;
+	reset=0;
+	up_down =1'b0;
+	#200 $finish;
+	end
+	
+	initial 
+	begin
+		$monitor("clk = %b, reset = %b,up_down=%b, q = %b", clk, reset,up_down, q);
+	end
+endmodule
