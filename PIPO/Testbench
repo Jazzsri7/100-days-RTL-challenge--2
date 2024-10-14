@@ -1,0 +1,34 @@
+module PIPO_tb();
+	reg [3:0] data_in;
+	reg clk;
+	reg ctrl;
+	wire [3:0] data_out;
+	
+	integer i;
+	
+	PIPO A(.ctrl(ctrl),.data_in(data_in),.clk(clk),.data_out(data_out));
+	initial
+	begin
+		$monitor("data_in=%b,ctrl=%b,clk=%b,data_out=%b",data_in,ctrl,clk,data_out);
+	end
+	
+	initial
+	begin
+		clk=1'b1;
+		forever #5 clk=~clk;
+	end
+	
+	initial
+	begin
+		ctrl=0;
+		data_in=0;
+		#10;
+		ctrl=1;
+			for(i=0;i<16;i=i+1)
+			begin
+				data_in=i;
+				#10;
+			end
+		#10 $finish;
+	end 
+	endmodule
