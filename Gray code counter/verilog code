@@ -1,0 +1,21 @@
+module gray_counter(clk,reset,gray_code);
+	input clk,reset;
+	output reg [2:0] gray_code;
+	
+	reg [2:0] binary;
+	
+	always@(posedge clk or posedge reset)
+	begin
+		if(reset)
+		begin
+			gray_code = 3'b000;
+			binary = 3'b000;
+		end
+		
+		else
+		begin
+			binary = binary+1;
+			gray_code = (binary>>1)^binary;
+		end
+	end
+endmodule
