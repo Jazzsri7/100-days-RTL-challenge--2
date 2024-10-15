@@ -1,0 +1,25 @@
+module gray_counter_tb();
+	reg clk,reset;
+	wire [2:0] gray_code;
+	
+	gray_counter DUT (.clk(clk),.reset(reset),.gray_code(gray_code));
+	
+	initial 
+	begin
+		clk=1'b1;
+		forever #5 clk = ~clk;
+	end
+	initial 
+	begin
+		reset=1;
+		#5;
+		reset = 0;
+		#150;
+		reset=1;
+		#10 $finish;
+	end
+	initial
+	begin
+		$monitor("value of gray_code=%b",gray_code);
+	end
+endmodule 
