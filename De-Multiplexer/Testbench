@@ -1,8 +1,8 @@
 module demux_tb();
 
 	// Inputs
-	reg [2:0] s;
-	reg enable;
+	reg [2:0] sel;
+	reg s;
 
 	// Output
 	wire [7:0] y;
@@ -11,28 +11,28 @@ module demux_tb();
 	// Instantiation and port mapping
 	demux uut (
 		.s(s), 
-		.enable(enable),
+		.sel(sel),
 		.y(y)
 	);
 		
         
 	// Stimulus generation
     initial
-	    begin
-		enable=0;
-		s = 3'b000;
+	begin
+		s = 0;
+		sel=3'b000;
 		#20;
-		enable = 1;
 		for(i=0;i<8;i=i+1)
 			begin
-				s=i;
+				s=1;
+				sel=i;
 				#20;
 			end
 		
 		#10 $finish;
-		end 
+	end 
 	initial 
 	  begin
-	  $monitor("enable=%b, s=%b, y=%b",enable,s,y);
+	  $monitor("sel=%b, s=%b, y=%b",sel,s,y);
 	  end
 endmodule
